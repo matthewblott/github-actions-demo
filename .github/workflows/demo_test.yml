@@ -1,0 +1,33 @@
+name: Demo App Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./src/
+
+    strategy:
+      matrix:
+        dotnet-version: [6.0.x]
+
+    env:
+      MODE: "dev"
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+
+      - name: Build
+        run: |
+          dotnet build
+      - name: Test App Code
+         run: dotnet test ./tests/demo.lib.tests/demo.lib.tests.csproj 
