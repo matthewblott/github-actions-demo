@@ -24,4 +24,4 @@ jobs:
       - name: Execute dotnet
         run: dotnet build
       - name: Test App Code
-         run: dotnet test ./tests/demo.lib.tests/demo.lib.tests.csproj
+        run: dotnet test ./tests/demo.lib.tests/demo.lib.tests.csproj
