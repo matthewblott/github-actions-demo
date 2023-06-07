@@ -45,5 +45,5 @@ jobs:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "notes.txt"
+          source: "./notes.txt"
           target: "~/"
