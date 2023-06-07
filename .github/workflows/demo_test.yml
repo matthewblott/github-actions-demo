@@ -22,6 +22,6 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet }}
       - name: Execute dotnet
-        run: dotnet build
+        run: dotnet build .
       - name: Test App Code
         run: dotnet test ./tests/demo.lib.tests/demo.lib.tests.csproj
