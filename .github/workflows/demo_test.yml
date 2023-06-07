@@ -28,8 +28,7 @@ jobs:
       - name: Test App Code
         run: dotnet test ./tests/demo.lib.tests/demo.lib.tests.csproj
 
-      - uses: actions/ssh-deploy@v4
       - name: Publish dotnet
-        with:
-          dotnet-version: ${{ matrix.dotnet }}
         run: dotnet publish . -c Release
+
+      # - uses: actions/ssh-deploy@v4
