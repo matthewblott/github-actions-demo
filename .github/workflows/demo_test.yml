@@ -32,5 +32,4 @@ jobs:
       - name: Publish dotnet
         with:
           dotnet-version: ${{ matrix.dotnet }}
-        run: |
-          dotnet publish . -c Release
+        run: dotnet publish . -c Release
