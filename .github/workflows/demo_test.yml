@@ -21,7 +21,16 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ matrix.dotnet }}
+
       - name: Execute dotnet
         run: dotnet build .
+
       - name: Test App Code
         run: dotnet test ./tests/demo.lib.tests/demo.lib.tests.csproj
+
+      - uses: actions/ssh-deploy@v4
+      - name: Publish dotnet
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
+        run: |
+          dotnet publish . -c Release
