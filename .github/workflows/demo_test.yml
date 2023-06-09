@@ -31,19 +31,20 @@ jobs:
       - name: Publish dotnet
         run: dotnet publish . -c Release
 
-      # - name: Deploy to Server
-      # - uses: actions/ssh-deploy@v4
-      #   env:
-      #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-      #     REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-      #     REMOTE_USER: ${{ secrets.REMOTE_USER }}
-      #     TARGET: ${{ secrets.REMOTE_TARGET }}
-      #
-      - name: Upload Files
-        uses: siva1024/scp-deployer@latest
+      - name: ssh scp ssh pipelines
+        uses: cross-the-world/ssh-scp-ssh-pipelines@v1.1.4
+        env:
+          WELCOME: "ssh scp ssh pipelines"
+          LASTSSH: "Doing something after copying"
         with:
           host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
+          user: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "./notes.txt"
-          target: "~/"
+          connect_timeout: 10s
+          first_ssh: |
+            echo $WELCOME 
+            rm -f notes.txt
+          scp: |
+            './notes.txt*' => /home/deployer/
+          last_ssh: |
+            echo $LASTSSH
