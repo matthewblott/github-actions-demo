@@ -39,11 +39,30 @@ jobs:
       #     REMOTE_USER: ${{ secrets.REMOTE_USER }}
       #     TARGET: ${{ secrets.REMOTE_TARGET }}
       #
-      - name: Upload Files
-        uses: siva1024/scp-deployer@latest
+
+      # - name: Upload Files
+      #   uses: siva1024/scp-deployer@latest
+      #   with:
+      #     host: ${{ secrets.REMOTE_HOST }}
+      #     username: ${{ secrets.REMOTE_USER }}
+      #     key: ${{ secrets.SSH_PRIVATE_KEY }}
+      #     source: "./notes.txt"
+      #     target: "~/"
+
+      - name: ssh scp ssh pipelines
+        uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+        env:
+          WELCOME: "ssh scp ssh pipelines"
+          LASTSSH: "Doing something after copying"
         with:
           host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
+          user: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "./notes.txt"
-          target: "~/"
+          connect_timeout: 10s
+          first_ssh: |
+            echo $WELCOME 
+            rm -f notes.txt
+          scp: |
+            './notes.txt*' => /home/deployer/
+          last_ssh: |
+            echo $LASTSSH
