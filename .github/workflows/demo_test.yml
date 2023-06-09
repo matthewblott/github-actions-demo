@@ -50,7 +50,7 @@ jobs:
       #     target: "~/"
 
       - name: ssh scp ssh pipelines
-        uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+        uses: cross-the-world/ssh-scp-ssh-pipelines@v0.2.2
         env:
           WELCOME: "ssh scp ssh pipelines"
           LASTSSH: "Doing something after copying"
