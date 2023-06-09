@@ -40,7 +40,7 @@ jobs:
       #     TARGET: ${{ secrets.REMOTE_TARGET }}
       #
       - name: Upload Files
-        uses: siva1024/scp-deployer@latest
+        uses: siva1024/scp-deployer@v0.2.2
         with:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
